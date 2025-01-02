@@ -1,6 +1,6 @@
 # Night-Voyager
 
-[![Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Cross-Modal Maps](cover.jpg)](https://youtu.be/fGtPHMqcT64 "Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Cross-Modal Maps")
+[![Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Cross-Modal Maps](cover.png)](https://youtu.be/fa9qpunLLeI "Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Cross-Modal Maps")
 
 
 # Reference:
