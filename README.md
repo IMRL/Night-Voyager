@@ -1,6 +1,6 @@
 # Night-Voyager
 
-[![Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps](cover.png)](https://youtu.be/x7XtC_ALz80 "Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps")
+[![Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps]()](https://youtu.be/x7XtC_ALz80 "Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps")
 
 
 # Reference:
