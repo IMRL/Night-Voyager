@@ -21,7 +21,7 @@
 ![](./img/System_Framework.png)
 
 ## 2. Dataset
-The collected nighttime dataset ([**Night-Voayger Dataset**]()) is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms. The streetlight detections are recorded in a separate folder. Additionally, we also leverage the nighttime sequences of the public [**MCD dataset**](https://mcdviral.github.io/) for evaluation.
+The collected nighttime dataset ([**Night-Voyager Dataset**]()) is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms. The streetlight detections are recorded in a separate folder. Additionally, we also leverage the nighttime sequences of the public [**MCD dataset**](https://mcdviral.github.io/) for evaluation.
 
 ## 3. Prerequisites
 ### 3.1. Ubuntu and ROS
@@ -48,7 +48,7 @@ source ~/ws_Night_Voyager/devel/setup.bash
 ```
 
 ## 6. Run
-Download our collected rosbag files via Baidu NetDisk ([**Night-Voayger Dataset**]()). Since the rosbag play node has been written in the launch files, please modify the paths of the downloaded rosbag files in the launch files (located in the launch subdirectory).
+Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset**]()). Since the rosbag play node has been written in the launch files, please modify the paths of the downloaded rosbag files in the launch files (located in the launch subdirectory).
 ```
 roslaunch night_voyager Scene_01.launch
 ```
