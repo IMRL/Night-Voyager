@@ -30,7 +30,7 @@ Ubuntu 18.04.
 ROS Melodic, please follow [ROS Installation](http://wiki.ros.org/ROS/Installation).
 
 ### 3.2. PCL, OpenCV, and Eigen
-PCL 1.8, please follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
+PCL 1.8, please follow [PCL Installation](https://pointclouds.org/downloads/).
 
 OpenCV 3.2.0, please follow [OpenCV Installation](http://opencv.org/).
 
