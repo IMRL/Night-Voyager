@@ -17,7 +17,7 @@
 - **2025-03-02**: The code and the collected nighttime dataset are released!
 
 ## 1. Introduction
-Night-Voyager is a consistent and efficient framework that harnesses rare object-level information from streetlight maps to fundamentally resolve the insufficiency and inconsistency bottlenecks inherent in nocturnal visual tasks, achieving robust and versatile nocturnal vision-aided state estimation in object maps.
+**Night-Voyager** is a consistent and efficient framework that harnesses rare object-level information from streetlight maps to fundamentally resolve the insufficiency and inconsistency bottlenecks inherent in nocturnal visual tasks, achieving robust and versatile nocturnal vision-aided state estimation in object maps.
 ![](./img/System_Framework.png)
 
 ## 2. Dataset
