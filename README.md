@@ -6,7 +6,7 @@
 <a href="https://arxiv.org/pdf/2502.20054"><img src='https://img.shields.io/badge/PDF-Arxiv-brightgreen' alt='PDF'></a>
 <a href="https://www.youtube.com/watch?v=x7XtC_ALz80"><img src='https://img.shields.io/badge/Video-Youtube-blue' alt='YouTube'></a>
 <a href=""><img src='https://img.shields.io/badge/Dataset-red' alt='Dataset'></a>
-<a href=""><img src='https://img.shields.io/badge/Supplement-pink' alt='Supplement'></a>
+<a href="https://github.com/IMRL/Night-Voyager/blob/main/Supplementary_Material/Supplementary_Material.pdf"><img src='https://img.shields.io/badge/Supplement-pink' alt='Supplement'></a>
 
 </div>
 
@@ -79,6 +79,8 @@ If you find our work beneficial to your research, you may consider citing:
   doi={10.1109/TRO.2025.3548540}
 }
 ```
+## 8 Acknowledgement
+The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). Special thanks for the fantastic works!
 
-# Reference:
-Tianxiao Gao, Mingle Zhao, Chengzhong Xu, and Hui Kong, Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps, IEEE Transactions on Robotics (T-RO), 2025
+## 9 Contact:
+The source code of this package is released under the [**GPLv2**](http://www.gnu.org/licenses/) license. For commercial use, please contact me at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo> to discuss an alternative license.
