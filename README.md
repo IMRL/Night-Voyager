@@ -16,26 +16,26 @@
 - **2025-02-18**: Our paper is accepted by T-RO 2025!
 - **2025-03-02**: The code and the collected nighttime dataset are released!
 
-## 1 Introduction
+## 1. Introduction
 Night-Voyager is a consistent and efficient framework that harnesses rare object-level information from streetlight maps to fundamentally resolve the insufficiency and inconsistency bottlenecks inherent in nocturnal visual tasks, achieving robust and versatile nocturnal vision-aided state estimation in object maps.
 ![](./img/System_Framework.png)
 
-## 2 Dataset
+## 2. Dataset
 The collected nighttime dataset is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms. The streetlight detections are recorded in a separate folder.
 
-## 3 Prerequisites
-### 3.1 Ubuntu and ROS
+## 3. Prerequisites
+### 3.1. Ubuntu and ROS
 Ubuntu 18.04.
 ROS Melodic, please follow [ROS Installation](http://wiki.ros.org/ROS/Installation).
 
-### 3.2 PCL, OpenCV, and Eigen
+### 3.2. PCL, OpenCV, and Eigen
 PCL 1.8, please follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
 
 OpenCV 3.2.0, please follow [OpenCV Installation](http://opencv.org/).
 
 Eigen 3.3.4, please follow [Eigen Installation](http://eigen.tuxfamily.org/index.php?title=Main_Page).
 
-## 4 Build
+## 4. Build
 Clone the repository and catkin_make:
 ```
 mkdir -p ws_Night_Voyager/src
@@ -46,13 +46,13 @@ catkin_make
 source ~/ws_Night_Voyager/devel/setup.bash
 ```
 
-## 6 Run
+## 6. Run
 Download our collected rosbag files via Baidu NetDisk. Since the rosbag play node has been written in the launch files, please modify the paths of the downloaded rosbag files in the launch file (located in the launch subdirectory).
 ```
 roslaunch night_voyager Scene_01.launch
 ```
 
-## 7 Citation
+## 7. Citation
 If you find our work beneficial to your research, you may consider citing:
 
 ```
@@ -78,8 +78,8 @@ If you find our work beneficial to your research, you may consider citing:
   doi={10.1109/TRO.2025.3548540}
 }
 ```
-## 8 Acknowledgement
+## 8. Acknowledgement
 The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic work!
 
-## 9 Contact:
+## 9. License
 The source code of this package is released under the [**GPLv2**](http://www.gnu.org/licenses/) license. For commercial use, please contact me at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo> to discuss an alternative license.
