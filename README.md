@@ -21,20 +21,18 @@ Night-Voyager is a consistent and efficient framework that harnesses rare object
 ![](./img/System_Framework.png)
 
 ## 2 Dataset
-The collected nighttime dataset is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms.
+The collected nighttime dataset is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms. The streetlight detections are recorded in a separate folder.
 
 ## 3 Prerequisites
 ### 3.1 Ubuntu and ROS
 Ubuntu 18.04. ROS Melodic, please follow [ROS Installation](http://wiki.ros.org/ROS/Installation).
 
-### 3.2 PCL, OpenCV, Eigen, and TBB
-PCL >= 1.8, please follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
+### 3.2 PCL, OpenCV, and Eigen
+PCL 1.8, please follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
 
-OpenCV >= 3.2.0, please follow [OpenCV Installation](http://opencv.org/).
+OpenCV 3.2.0, please follow [OpenCV Installation](http://opencv.org/).
 
-TBB Installation
-
-Eigen >= 3.3.4, please follow [Eigen Installation](http://eigen.tuxfamily.org/index.php?title=Main_Page).
+Eigen 3.3.4, please follow [Eigen Installation](http://eigen.tuxfamily.org/index.php?title=Main_Page).
 
 ## 4 Build
 Clone the repository and catkin_make:
@@ -80,7 +78,7 @@ If you find our work beneficial to your research, you may consider citing:
 }
 ```
 ## 8 Acknowledgement
-The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). Special thanks for the fantastic works!
+The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic work!
 
 ## 9 Contact:
 The source code of this package is released under the [**GPLv2**](http://www.gnu.org/licenses/) license. For commercial use, please contact me at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo> to discuss an alternative license.
