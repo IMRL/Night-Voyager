@@ -25,7 +25,8 @@ The collected nighttime dataset is also available online. Each scenario in the d
 
 ## 3 Prerequisites
 ### 3.1 Ubuntu and ROS
-Ubuntu 18.04. ROS Melodic, please follow [ROS Installation](http://wiki.ros.org/ROS/Installation).
+Ubuntu 18.04.
+ROS Melodic, please follow [ROS Installation](http://wiki.ros.org/ROS/Installation).
 
 ### 3.2 PCL, OpenCV, and Eigen
 PCL 1.8, please follow [PCL Installation](http://www.pointclouds.org/downloads/linux.html).
