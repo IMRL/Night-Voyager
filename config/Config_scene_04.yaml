@@ -1,0 +1,180 @@
+pcd:
+    pcd_path: streetlight_map/scene_04/lamps.txt
+    cluster_num: 39
+    use_virtual_center: true
+    virtual_center_path: streetlight_map/scene_04/virtual_centers.txt
+
+prior_pose:
+    downsampled_pose_path: streetlight_map/scene_04/downsampled_poses.txt
+    prior_pose_path: streetlight_map/scene_04/selected_poses.txt
+
+common:
+    img_topic: /camera/color/image_raw/compressed
+    box_topic: /yolov7_bbox
+    odom_topic: /odom
+    imu_topic: /livox/imu
+
+camera:
+    cam_fx: 908.524
+    cam_fy: 908.919
+    cam_cx: 642.150
+    cam_cy: 352.982
+    res_x: 1280
+    res_y: 720
+    distortion: [0, 0, 0, 0]
+    dist_model: radtan
+
+imu:
+    gyro_std: [1.6912455461587871e-03, 1.2118225332973804e-03, 1.6146741327812619e-03]
+    accel_std: [7.2510837330793689e-04, 8.8071690484254771e-04, 1.3471694990898537e-03]
+    accel_bias_std: [3.0608877651619066e-05, 2.0168661087254066e-05, 3.7608575535597191e-05]
+    gyro_bias_std: [8.1307125981080534e-05, 4.7064776326160538e-05, 9.4599609702988706e-05]
+    Rci: [0.00208164, -0.999858, -0.0167461,
+          0.430466,  0.0160109,  -0.902465,
+          0.902605,  -0.00532965,  0.430438]
+    pci: [0.071399057, -0.093224676, -0.035436303]
+    Roi: [0.902605,  -0.00532965,  0.430438,
+          -0.00208164, 0.999858,  0.0167461,
+          -0.430466,  -0.0160109,  0.902465]
+    accel_norm: 9.81
+    gravity_mag: 9.81
+
+odom:
+    vel_std: [0.01, 0.01, 0.01]
+
+state:
+    which_group: 2 # -2: msckf, -1: no group, 0: features are grouped in IMU state, 1: features are grouped in relative transform,
+                   #  2: features are grouped between clone state and relative transform
+    max_clone_size: 11
+    max_slam_features: 50
+    max_slam_in_update: 25
+    max_msckf_in_update: 1000
+    feat_rep_msckf: 0
+    feat_rep_slam: 0
+
+update:
+    do_update_msckf: true
+    do_update_slam: true
+    do_update_map: true
+    do_update_odom: true
+    do_update_plane: true
+    use_match_extension: true
+    msckf_iekf_sigma_px: 4
+    msckf_chi2_multipler: 1
+    slam_sigma_px: 4
+    slam_chi2_multipler: 1
+    zupt_chi2_multipler: 1
+    map_sigma_px: 1.5
+    map_chi2_multipler_dl: 8
+    map_chi2_multipler_bi: 8
+    odom_chi2_multipler: 5
+    plane_chi2_multipler_loc: 1.0
+    plane_chi2_multipler_prior: 1.0
+    plane_distance_weight_loc: 0.02
+    plane_distance_weight_prior: 0.02
+    plane_distance_threshold_loc: 1.5
+    plane_distance_threshold_prior: 5.0
+
+match:
+    z_th: 55
+    update_z_th: 75
+    extend: 20
+    large_extend: 20
+    grey_th: 248
+    grey_th_low: 235
+    alpha: 0.2 # 0.2
+    ang_th_dl: 0.995
+    ang_th_bi: 0.9998
+    large_off: 10
+    dl_area: 40
+    dl_filter: true
+    bi_filter: true
+    remain_match: true
+
+init:
+    viwo_init:
+        init_window_time: 1.0
+        init_imu_thresh: 1.0
+        gravity_mag: 9.81
+        init_max_features: 50
+    map_init:
+        search_dist_scope1: 75
+        search_dist_scope2: 75
+        sine_th: 0.05
+        init_use_binary: true
+        init_grey_threshold: 252
+        init_grey_threshold_low: 230
+        outlier_score: 10
+        max_st_dist: 65
+        preset_outliers: 0
+        top_tuples_in_region: 100
+        top_poses: 25
+        expansion_proj: 20
+        subscore_weight: 1
+        prior_init_available: false
+        prior_scale: 10.0
+        prior_init: [0.0, 0.0, 0.0]
+
+feat_init:
+    triangulate_1d: false
+    refine_features: true
+    max_runs: 5
+    init_lamda: 1e-3
+    max_lamda: 1e10
+    min_dx: 1e-6
+    min_dcost: 1e-6
+    lam_mult: 10
+    min_dist: 0.25
+    max_dist: 75
+    max_baseline: 200
+    max_cond_number: 20000
+
+tracker:
+    histogram_method: 1 # 0: NONE, 1: HISTOGRAM, 2: CLAHE
+    num_features: 150
+    fast_threshold: 20
+    grid_x: 32
+    grid_y: 18
+    min_px_dist: 8
+    pyr_levels: 5
+    win_size: 15
+
+zupt:
+    try_zupt: true
+    zupt_max_velocity: 0.2
+    zupt_noise_multiplier: 10
+    zupt_max_disparity: 0.5
+    zupt_max_velocity_odom: 0.05
+    zupt_only_at_beginning: false
+
+tracking_recover:
+    dist_th: 30 # 30 for tracking recovery
+    ang_th: 0.35
+    lost_dist_th: 1
+    lost_ang_th: 0.5
+    z_th: 15
+    extend: 20
+    grey_thresh_low: 230
+    expansion_proj: 40
+    subscore_weight: 1
+    variance: 64
+    search_dist_scope: 45
+    search_bar_height: 20
+    area_th: 150
+    expected_weight: 0.2
+    outlier_cost: 0.5
+    sigma_pix: 1
+    chi2_multipler_dl_maylost: 50
+    chi2_multipler_bi_maylost: 50
+    chi2_multipler_dl_lost: 8
+    chi2_multipler_bi_lost: 8
+    prior_z_diff_th: 1
+
+save:
+    save_total_state: true
+    save_time_consume: true
+    of_state_est: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_estimation.txt"
+    of_state_std: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_deviation.txt"
+    of_state_loc: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_tum_loc.txt"
+    of_state_global: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_tum_global.txt"
+    of_state_tracking_recover: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/"
