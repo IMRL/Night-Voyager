@@ -41,6 +41,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   image_transport
   visualization_msgs
+  message_generation
 )
 
 find_package(Eigen3 REQUIRED)
@@ -61,6 +62,7 @@ add_message_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
+  std_msgs
   sensor_msgs
   nav_msgs
   geometry_msgs
@@ -69,7 +71,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES Night_Voyager
-   CATKIN_DEPENDS cv_bridge roscpp rospy sensor_msgs std_msgs message_runtime nav_msgs geometry_msgs image_transport visualization_msgs tf
+   CATKIN_DEPENDS message_runtime roscpp rospy sensor_msgs std_msgs nav_msgs geometry_msgs image_transport visualization_msgs tf cv_bridge
    DEPENDS EIGEN3 PCL
 )
 
@@ -98,24 +100,26 @@ include_directories(
 #   ${PCL_LIBRARIES} 
 # )
 
-file(GLOB_RECURSE NIGHT_VOYAGER_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE NIGHT_VOYAGER_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-list(FILTER NIGHT_VOYAGER_LIBRARIES EXCLUDE REGEX ".*main\\.cpp$")
+list(FILTER NIGHT_VOYAGER_SRCS EXCLUDE REGEX ".*main\\.cpp$")
 
-add_library(${PROJECT_NAME} SHARED ${NIGHT_VOYAGER_LIBRARIES})
-target_link_libraries(
-  ${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  ${OpenCV_LIBRARIES}
-  ${Boost_LIBRARIES}
-  ${PCL_LIBRARIES}
-  ${cv_bridge_LIBRARIES}
-  ${image_transport_LIBRARIES}
-  ${TBB_LIBRARIES}
-  ${tf_LIBRARIES}
-  )
-target_include_directories(${PROJECT_NAME} PUBLIC include)
+# add_library(${PROJECT_NAME} SHARED ${NIGHT_VOYAGER_LIBRARIES})
+# target_link_libraries(
+#   ${PROJECT_NAME}
+#   ${catkin_LIBRARIES}
+#   ${OpenCV_LIBRARIES}
+#   ${Boost_LIBRARIES}
+#   ${PCL_LIBRARIES}
+#   ${cv_bridge_LIBRARIES}
+#   ${image_transport_LIBRARIES}
+#   ${TBB_LIBRARIES}
+#   ${tf_LIBRARIES}
+# )
+# target_include_directories(${PROJECT_NAME} PUBLIC include)
 
-add_executable(night_voyager_node src/main.cpp)
-target_link_libraries(night_voyager_node ${PROJECT_NAME})
+add_executable(night_voyager_node src/main.cpp ${NIGHT_VOYAGER_SRCS})
+add_dependencies(night_voyager_node ${PROJECT_NAME}_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
+target_link_libraries(night_voyager_node ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES}
+                                         ${cv_bridge_LIBRARIES} ${image_transport_LIBRARIES} ${TBB_LIBRARIES} ${tf_LIBRARIES})
 
