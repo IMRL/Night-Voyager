@@ -1,1 +1,0 @@
-# timestamp(s) q p v bg ba q_MAPtoLOC t_MAPtoLOC cam_imu_dt cam_k cam_d cam_rot cam_trans
