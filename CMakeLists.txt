@@ -21,9 +21,9 @@ set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0 -Wall -Wextra -fno-omit-frame-pointer")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra -fomit-frame-pointer -DNDEBUG")
 
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Debug)  # 默认使用 Debug 模式
-endif()
+# if(NOT CMAKE_BUILD_TYPE)
+#     set(CMAKE_BUILD_TYPE Debug)
+# endif()
 
 
 ## Find catkin macros and libraries
