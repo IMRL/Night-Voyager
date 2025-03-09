@@ -48,7 +48,7 @@ source ~/ws_Night_Voyager/devel/setup.bash
 ```
 
 ## 6. Run
-Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset**]()). Since the rosbag play node has been written in the launch files, please modify the paths of the downloaded rosbag files in the launch files (located in the launch subdirectory).
+Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4)). Since the rosbag play node has been written in the launch files, please modify the paths of the downloaded rosbag files in the launch files (located in the launch subdirectory).
 ```
 roslaunch night_voyager Scene_01.launch
 ```
