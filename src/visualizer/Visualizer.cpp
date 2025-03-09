@@ -2,8 +2,8 @@
  * Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps
  * Copyright (C) 2025 Night-Voyager Contributors
  * 
- * For commercial use, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
- * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>
+ * For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
+ * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>. For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
  * 
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.
@@ -65,6 +65,7 @@ Visualizer::Visualizer(ros::NodeHandle &nh, const NightVoyagerOptions &options, 
     save_total_state = options.save_total_state;
     save_time_consume = options.save_time_consume;
     if (options.save_total_state) {
+        cout << endl << options.of_state_est << endl << options.of_state_std << endl << options.of_state_tum_loc << endl << options.of_state_tum_global << endl;
         // If it exists, then delete it
         if (boost::filesystem::exists(options.of_state_est))
             boost::filesystem::remove(options.of_state_est);
@@ -107,6 +108,8 @@ Visualizer::Visualizer(ros::NodeHandle &nh, const NightVoyagerOptions &options, 
         boost::filesystem::create_directories(boost::filesystem::path(options.of_state_est.c_str()).parent_path());
         boost::filesystem::create_directories(boost::filesystem::path(options.of_state_std.c_str()).parent_path());
         boost::filesystem::create_directories(boost::filesystem::path(options.of_state_tum_loc.c_str()).parent_path());
+        boost::filesystem::create_directories(boost::filesystem::path(options.of_state_tum_global.c_str()).parent_path());
+        boost::filesystem::create_directories(boost::filesystem::path(options.of_state_tracking_recover.c_str()));
 
         // Open the files
         of_state_est.open(options.of_state_est.c_str());

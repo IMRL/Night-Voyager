@@ -82,5 +82,6 @@ If you find our work beneficial to your research, you may consider citing:
 ## 8. Acknowledgement
 The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic work!
 
-## 9. License
-The source code of this package is released under the [**GPLv2**](http://www.gnu.org/licenses/) license. For commercial use, please contact me at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo> to discuss an alternative license.
+## 9. Contact
+- For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>.
+- For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.

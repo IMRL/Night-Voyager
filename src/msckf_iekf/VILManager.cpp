@@ -2,8 +2,8 @@
  * Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps
  * Copyright (C) 2025 Night-Voyager Contributors
  *
- * For commercial use, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
- * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>
+ * For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
+ * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>. For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
  *
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.

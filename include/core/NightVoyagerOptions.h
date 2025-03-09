@@ -2,8 +2,8 @@
  * Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps
  * Copyright (C) 2025 Night-Voyager Contributors
  * 
- * For commercial use, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
- * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>
+ * For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
+ * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>. For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
  * 
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.
@@ -566,11 +566,16 @@ struct NightVoyagerOptions {
 
         nh.param<bool>("save/save_total_state", save_total_state, false);
         nh.param<bool>("save/save_time_consume", save_time_consume, false);
-        nh.param<string>("save/state_all", of_state_est, root_dir + "/log/state_estimation.txt");
-        nh.param<string>("save/state_cov", of_state_std, root_dir + "/log/state_deviation.txt");
-        nh.param<string>("save/state_tum_loc", of_state_tum_loc, root_dir + "/log/state_tum_loc.txt");
-        nh.param<string>("save/state_tum_global", of_state_tum_global, root_dir + "/log/state_tum_global.txt");
-        nh.param<string>("save/state_tum_tracking_recover", of_state_tracking_recover, root_dir + "/log/");
+        nh.param<string>("save/of_state_est", of_state_est, "");
+        nh.param<string>("save/of_state_std", of_state_std, "");
+        nh.param<string>("save/of_state_tum_loc", of_state_tum_loc, "");
+        nh.param<string>("save/of_state_tum_global", of_state_tum_global, "");
+        nh.param<string>("save/of_state_tracking_recover", of_state_tracking_recover, "");
+        of_state_est = root_dir + of_state_est;
+        of_state_std = root_dir + of_state_std;
+        of_state_tum_loc = root_dir + of_state_tum_loc;
+        of_state_tum_global = root_dir + of_state_tum_global;
+        of_state_tracking_recover = root_dir + of_state_tracking_recover;
     }
 
     string root_dir;

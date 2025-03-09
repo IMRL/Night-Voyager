@@ -172,8 +172,8 @@ tracking_recover:
 save:
     save_total_state: true
     save_time_consume: true
-    of_state_est: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_estimation.txt"
-    of_state_std: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_deviation.txt"
-    of_state_loc: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_tum_loc.txt"
-    of_state_global: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/state_tum_global.txt"
-    of_state_tracking_recover: "/home/gtx/ws_Night_Rider_pp/src/Night_Rider_pp/log/"
+    of_state_est: "log/state_estimation.txt"
+    of_state_std: "log/state_deviation.txt"
+    of_state_tum_loc: "log/state_tum_loc.txt"
+    of_state_tum_global: "log/state_tum_global.txt"
+    of_state_tracking_recover: "log/"
