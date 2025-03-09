@@ -79,7 +79,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-file(GLOB_RECURSE INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/Night_Voyager/include")
+file(GLOB_RECURSE INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
@@ -98,7 +98,7 @@ include_directories(
 #   ${PCL_LIBRARIES} 
 # )
 
-file(GLOB_RECURSE NIGHT_VOYAGER_LIBRARIES "${CMAKE_SOURCE_DIR}/Night_Voyager/src/*.cpp")
+file(GLOB_RECURSE NIGHT_VOYAGER_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 list(FILTER NIGHT_VOYAGER_LIBRARIES EXCLUDE REGEX ".*main\\.cpp$")
 
