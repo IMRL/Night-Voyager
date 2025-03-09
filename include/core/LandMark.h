@@ -11,7 +11,7 @@
 #ifndef LANDMARK_H
 #define LANDMARK_H
 
-#include "core/PoseHamilton.h"
+#include "core/Pose.h"
 #include "core/Vec.h"
 #include "utils/Print.h"
 #include <Eigen/Core>
@@ -41,7 +41,7 @@ class Landmark : public Vec {
     /// Number of times the update has failed for this feature (we should remove if it fails a couple times!)
     int update_fail_count = 0;
 
-    std::shared_ptr<PoseHamilton> anchor_frame;
+    std::shared_ptr<Pose> anchor_frame;
 
     /**
      * @brief Overrides the default vector update rule

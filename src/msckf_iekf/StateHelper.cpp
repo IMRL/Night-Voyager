@@ -156,7 +156,7 @@ void StateHelper::augment_clone(std::shared_ptr<State> state) {
     std::shared_ptr<Type> posetemp = StateHelper::clone(state, state->_imu->pose());
 
     // Cast to a JPL pose type, check if valid
-    std::shared_ptr<PoseHamilton> pose = std::dynamic_pointer_cast<PoseHamilton>(posetemp);
+    std::shared_ptr<Pose> pose = std::dynamic_pointer_cast<Pose>(posetemp);
     if (pose == nullptr) {
         PRINT_ERROR(RED "INVALID OBJECT RETURNED FROM STATEHELPER CLONE, EXITING!#!@#!@#\n" RESET);
         std::exit(EXIT_FAILURE);

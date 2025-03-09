@@ -21,7 +21,7 @@ class State;
 class Type;
 class PcdManager;
 class StreetlightFeature;
-class PoseHamilton;
+class Pose;
 
 class UpdaterHelper {
   public:
@@ -126,13 +126,13 @@ class UpdaterHelper {
      * @param[out] res Measurement residual for this feature
      * @param[out] x_order Extra variables our extra Jacobian has (for example anchored pose)
      */
-    static void get_plane_jacobian_full(std::shared_ptr<PoseHamilton> pose1, std::shared_ptr<PoseHamilton> pose2, const Eigen::Matrix3d &Roi,
+    static void get_plane_jacobian_full(std::shared_ptr<Pose> pose1, std::shared_ptr<Pose> pose2, const Eigen::Matrix3d &Roi,
                                         Eigen::MatrixXd &H_x, Eigen::VectorXd &res, std::vector<std::shared_ptr<Type>> &x_order);
 
-    static void get_plane_jacobian_full_group(std::shared_ptr<PoseHamilton> pose1, std::shared_ptr<PoseHamilton> pose2, const Eigen::Matrix3d &Roi,
+    static void get_plane_jacobian_full_group(std::shared_ptr<Pose> pose1, std::shared_ptr<Pose> pose2, const Eigen::Matrix3d &Roi,
                                               Eigen::MatrixXd &H_x, Eigen::VectorXd &res, std::vector<std::shared_ptr<Type>> &x_order);
 
-    static void get_plane_jacobian_full_msckf(std::shared_ptr<PoseHamilton> pose1, std::shared_ptr<PoseHamilton> pose2, const Eigen::Matrix3d &Roi,
+    static void get_plane_jacobian_full_msckf(std::shared_ptr<Pose> pose1, std::shared_ptr<Pose> pose2, const Eigen::Matrix3d &Roi,
                                               Eigen::MatrixXd &H_x, Eigen::VectorXd &res, std::vector<std::shared_ptr<Type>> &x_order);
 
     /**
@@ -146,16 +146,16 @@ class UpdaterHelper {
      * @param[out] res Measurement residual for this feature
      * @param[out] x_order Extra variables our extra Jacobian has (for example anchored pose)
      */
-    static void get_plane_jacobian_full(std::shared_ptr<PoseHamilton> pose_IitoLOC, std::shared_ptr<PoseHamilton> pose_MAPtoLOC,
+    static void get_plane_jacobian_full(std::shared_ptr<Pose> pose_IitoLOC, std::shared_ptr<Pose> pose_MAPtoLOC,
                                         const Eigen::Matrix3d &prior_R_ItoMAP, const Eigen::Vector3d &prior_p_IinMAP, const Eigen::Matrix3d &Roi,
                                         Eigen::MatrixXd &H_x, Eigen::VectorXd &res, std::vector<std::shared_ptr<Type>> &x_order);
 
-    static void get_plane_jacobian_full_group(std::shared_ptr<PoseHamilton> pose_IitoLOC, std::shared_ptr<PoseHamilton> pose_MAPtoLOC,
+    static void get_plane_jacobian_full_group(std::shared_ptr<Pose> pose_IitoLOC, std::shared_ptr<Pose> pose_MAPtoLOC,
                                               const Eigen::Matrix3d &prior_R_ItoMAP, const Eigen::Vector3d &prior_p_IinMAP,
                                               const Eigen::Matrix3d &Roi, Eigen::MatrixXd &H_x, Eigen::VectorXd &res,
                                               std::vector<std::shared_ptr<Type>> &x_order);
 
-    static void get_plane_jacobian_full_msckf(std::shared_ptr<PoseHamilton> pose_IitoLOC, std::shared_ptr<PoseHamilton> pose_MAPtoLOC,
+    static void get_plane_jacobian_full_msckf(std::shared_ptr<Pose> pose_IitoLOC, std::shared_ptr<Pose> pose_MAPtoLOC,
                                               const Eigen::Matrix3d &prior_R_ItoMAP, const Eigen::Vector3d &prior_p_IinMAP,
                                               const Eigen::Matrix3d &Roi, Eigen::MatrixXd &H_x, Eigen::VectorXd &res,
                                               std::vector<std::shared_ptr<Type>> &x_order);

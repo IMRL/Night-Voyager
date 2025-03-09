@@ -40,14 +40,14 @@ class State {
         _variables.push_back(_imu);
         current_id += _imu->size();
 
-        _pose_MAPtoLOC = std::make_shared<PoseHamilton>();
+        _pose_MAPtoLOC = std::make_shared<Pose>();
         _pose_MAPtoLOC->set_local_id(current_id);
         _variables.push_back(_pose_MAPtoLOC);
         current_id += _pose_MAPtoLOC->size();
 
         _cam_intrinsics = std::make_shared<Vec>(8);
-        _calib_IMUtoCAM = std::make_shared<PoseHamilton>();
-        _calib_IMUtoOdom = std::make_shared<PoseHamilton>();
+        _calib_IMUtoCAM = std::make_shared<Pose>();
+        _calib_IMUtoOdom = std::make_shared<Pose>();
 
         // Finally initialize our covariance to small value
         _Cov = std::pow(1e-3, 2) * Eigen::MatrixXd::Identity(current_id, current_id);
@@ -78,10 +78,10 @@ class State {
         }
         _variables.push_back(_imu);
 
-        _pose_MAPtoLOC = std::make_shared<PoseHamilton>();
+        _pose_MAPtoLOC = std::make_shared<Pose>();
         new_clone = other._pose_MAPtoLOC->clone();
         new_clone->set_local_id(other._pose_MAPtoLOC->id());
-        _pose_MAPtoLOC = std::dynamic_pointer_cast<PoseHamilton>(new_clone);
+        _pose_MAPtoLOC = std::dynamic_pointer_cast<Pose>(new_clone);
         if (_pose_MAPtoLOC == nullptr) {
             PRINT_ERROR(RED "INVALID OBJECT RETURNED FROM STATEHELPER CLONE, EXITING!#!@#!@#\n" RESET);
             std::exit(EXIT_FAILURE);
@@ -96,17 +96,17 @@ class State {
             std::exit(EXIT_FAILURE);
         }
 
-        _calib_IMUtoCAM = std::make_shared<PoseHamilton>();
+        _calib_IMUtoCAM = std::make_shared<Pose>();
         new_clone = other._calib_IMUtoCAM->clone();
-        _calib_IMUtoCAM = std::dynamic_pointer_cast<PoseHamilton>(new_clone);
+        _calib_IMUtoCAM = std::dynamic_pointer_cast<Pose>(new_clone);
         if (_calib_IMUtoCAM == nullptr) {
             PRINT_ERROR(RED "INVALID OBJECT RETURNED FROM STATEHELPER CLONE, EXITING!#!@#!@#\n" RESET);
             std::exit(EXIT_FAILURE);
         }
 
-        _calib_IMUtoOdom = std::make_shared<PoseHamilton>();
+        _calib_IMUtoOdom = std::make_shared<Pose>();
         new_clone = other._calib_IMUtoOdom->clone();
-        _calib_IMUtoOdom = std::dynamic_pointer_cast<PoseHamilton>(new_clone);
+        _calib_IMUtoOdom = std::dynamic_pointer_cast<Pose>(new_clone);
         if (_calib_IMUtoOdom == nullptr) {
             PRINT_ERROR(RED "INVALID OBJECT RETURNED FROM STATEHELPER CLONE, EXITING!#!@#!@#\n" RESET);
             std::exit(EXIT_FAILURE);
@@ -115,10 +115,10 @@ class State {
         _cam_intrinsics_camera = other._cam_intrinsics_camera;
 
         for (auto &pair : other._clones_IMU) {
-            std::shared_ptr<PoseHamilton> posetemp = std::make_shared<PoseHamilton>();
+            std::shared_ptr<Pose> posetemp = std::make_shared<Pose>();
             new_clone = pair.second->clone();
             new_clone->set_local_id(pair.second->id());
-            posetemp = std::dynamic_pointer_cast<PoseHamilton>(new_clone);
+            posetemp = std::dynamic_pointer_cast<Pose>(new_clone);
             if (posetemp == nullptr) {
                 PRINT_ERROR(RED "INVALID OBJECT RETURNED FROM STATEHELPER CLONE, EXITING!#!@#!@#\n" RESET);
                 std::exit(EXIT_FAILURE);
@@ -193,13 +193,13 @@ class State {
     std::unordered_map<size_t, std::shared_ptr<Landmark>> _features_SLAM;
 
     /// Our map frame to local frame
-    std::shared_ptr<PoseHamilton> _pose_MAPtoLOC;
+    std::shared_ptr<Pose> _pose_MAPtoLOC;
 
     /// Calibration pose for camera (R_ItoC, p_IinC)
-    std::shared_ptr<PoseHamilton> _calib_IMUtoCAM;
+    std::shared_ptr<Pose> _calib_IMUtoCAM;
 
     /// Calibration pose for odom (R_ItoO, p_IinC)
-    std::shared_ptr<PoseHamilton> _calib_IMUtoOdom;
+    std::shared_ptr<Pose> _calib_IMUtoOdom;
 
     /// Camera intrinsics camera objects
     std::shared_ptr<CamBase> _cam_intrinsics_camera;
@@ -208,7 +208,7 @@ class State {
     std::shared_ptr<Vec> _cam_intrinsics;
 
     /// Map between imaging times and clone poses (q_GtoIi, p_IiinG)
-    std::map<double, std::shared_ptr<PoseHamilton>> _clones_IMU;
+    std::map<double, std::shared_ptr<Pose>> _clones_IMU;
 
     bool _zupt;
 

@@ -11,7 +11,7 @@
 #ifndef POSEV_H
 #define POSEV_H
 
-#include "core/PoseHamilton.h"
+#include "core/Pose.h"
 
 namespace night_voyager {
 
@@ -19,7 +19,7 @@ class Posev : public Type {
   public:
     Posev() : Type(9) {
         // Initialize subvariables
-        _pose = std::shared_ptr<PoseHamilton>(new PoseHamilton());
+        _pose = std::shared_ptr<Pose>(new Pose());
         _v = std::shared_ptr<Vec>(new Vec(3));
 
         Eigen::Matrix<double, 5, 5> pose0 = Eigen::Matrix<double, 5, 5>::Identity();
@@ -107,7 +107,7 @@ class Posev : public Type {
     Eigen::Matrix<double, 3, 1> vel() const { return _v->value(); }
 
     /// Pose type access
-    std::shared_ptr<PoseHamilton> pose() { return _pose; }
+    std::shared_ptr<Pose> pose() { return _pose; }
 
     /// Quaternion type access
     std::shared_ptr<Mat> R() { return _pose->R(); }
@@ -119,7 +119,7 @@ class Posev : public Type {
     std::shared_ptr<Vec> v() { return _v; }
 
   protected:
-    std::shared_ptr<PoseHamilton> _pose;
+    std::shared_ptr<Pose> _pose;
     std::shared_ptr<Vec> _v;
 
     /**

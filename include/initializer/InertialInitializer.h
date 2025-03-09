@@ -20,7 +20,7 @@
 
 namespace night_voyager {
 class IMU;
-class PoseHamilton;
+class Pose;
 class Type;
 class State;
 class FeatureDatabase;

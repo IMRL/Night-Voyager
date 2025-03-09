@@ -96,7 +96,7 @@ void UpdaterHelper::get_feature_jacobian_full(std::shared_ptr<State> state, Upda
 
     for (size_t m = 0; m < feature.timestamps.size(); m++) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -107,7 +107,7 @@ void UpdaterHelper::get_feature_jacobian_full(std::shared_ptr<State> state, Upda
     if (feature.pseudo_anchor_clone_timestamp == -1.0) {
         feature.pseudo_anchor_clone_timestamp = state->_timestamp;
     }
-    std::shared_ptr<PoseHamilton> clone_PSAi = state->_clones_IMU.at(feature.pseudo_anchor_clone_timestamp);
+    std::shared_ptr<Pose> clone_PSAi = state->_clones_IMU.at(feature.pseudo_anchor_clone_timestamp);
     if (map_hx.find(clone_PSAi) == map_hx.end()) {
         map_hx.insert({clone_PSAi, total_hx});
         x_order.push_back(clone_PSAi);
@@ -126,7 +126,7 @@ void UpdaterHelper::get_feature_jacobian_full(std::shared_ptr<State> state, Upda
 
     //=========================================================================
     //=========================================================================
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -135,7 +135,7 @@ void UpdaterHelper::get_feature_jacobian_full(std::shared_ptr<State> state, Upda
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -239,7 +239,7 @@ void UpdaterHelper::get_feature_jacobian_full_clone_group(std::shared_ptr<State>
 
     for (size_t m = 0; m < feature.timestamps.size(); m++) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -250,7 +250,7 @@ void UpdaterHelper::get_feature_jacobian_full_clone_group(std::shared_ptr<State>
     if (feature.pseudo_anchor_clone_timestamp == -1.0) {
         feature.pseudo_anchor_clone_timestamp = state->_timestamp;
     }
-    std::shared_ptr<PoseHamilton> clone_PSAi = state->_clones_IMU.at(feature.pseudo_anchor_clone_timestamp);
+    std::shared_ptr<Pose> clone_PSAi = state->_clones_IMU.at(feature.pseudo_anchor_clone_timestamp);
     if (map_hx.find(clone_PSAi) == map_hx.end()) {
         map_hx.insert({clone_PSAi, total_hx});
         x_order.push_back(clone_PSAi);
@@ -270,7 +270,7 @@ void UpdaterHelper::get_feature_jacobian_full_clone_group(std::shared_ptr<State>
     //=========================================================================
     //=========================================================================
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -279,7 +279,7 @@ void UpdaterHelper::get_feature_jacobian_full_clone_group(std::shared_ptr<State>
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -384,7 +384,7 @@ void UpdaterHelper::get_feature_jacobian_full_rel_group(std::shared_ptr<State> s
 
     for (size_t m = 0; m < feature.timestamps.size(); m++) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -392,7 +392,7 @@ void UpdaterHelper::get_feature_jacobian_full_rel_group(std::shared_ptr<State> s
         }
     }
 
-    std::shared_ptr<PoseHamilton> clone_A = state->_pose_MAPtoLOC;
+    std::shared_ptr<Pose> clone_A = state->_pose_MAPtoLOC;
     if (map_hx.find(clone_A) == map_hx.end()) {
         map_hx.insert({clone_A, total_hx});
         x_order.push_back(clone_A);
@@ -416,7 +416,7 @@ void UpdaterHelper::get_feature_jacobian_full_rel_group(std::shared_ptr<State> s
     //=========================================================================
     //=========================================================================
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -425,7 +425,7 @@ void UpdaterHelper::get_feature_jacobian_full_rel_group(std::shared_ptr<State> s
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -504,7 +504,7 @@ void UpdaterHelper::get_feature_jacobian_full_no_group(std::shared_ptr<State> st
 
     for (size_t m = 0; m < feature.timestamps.size(); m++) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -512,7 +512,7 @@ void UpdaterHelper::get_feature_jacobian_full_no_group(std::shared_ptr<State> st
         }
     }
 
-    std::shared_ptr<PoseHamilton> clone_A = state->_pose_MAPtoLOC;
+    std::shared_ptr<Pose> clone_A = state->_pose_MAPtoLOC;
     if (map_hx.find(clone_A) == map_hx.end()) {
         map_hx.insert({clone_A, total_hx});
         x_order.push_back(clone_A);
@@ -536,7 +536,7 @@ void UpdaterHelper::get_feature_jacobian_full_no_group(std::shared_ptr<State> st
     //=========================================================================
     //=========================================================================
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -545,7 +545,7 @@ void UpdaterHelper::get_feature_jacobian_full_no_group(std::shared_ptr<State> st
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -619,7 +619,7 @@ void UpdaterHelper::get_feature_jacobian_full_msckf(std::shared_ptr<State> state
 
     for (size_t m = 0; m < feature.timestamps.size(); m++) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature.timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -630,7 +630,7 @@ void UpdaterHelper::get_feature_jacobian_full_msckf(std::shared_ptr<State> state
     if (feature.pseudo_anchor_clone_timestamp == -1.0) {
         feature.pseudo_anchor_clone_timestamp = state->_timestamp;
     }
-    std::shared_ptr<PoseHamilton> clone_PSAi = state->_clones_IMU.at(feature.pseudo_anchor_clone_timestamp);
+    std::shared_ptr<Pose> clone_PSAi = state->_clones_IMU.at(feature.pseudo_anchor_clone_timestamp);
     if (map_hx.find(clone_PSAi) == map_hx.end()) {
         map_hx.insert({clone_PSAi, total_hx});
         x_order.push_back(clone_PSAi);
@@ -650,7 +650,7 @@ void UpdaterHelper::get_feature_jacobian_full_msckf(std::shared_ptr<State> state
     //=========================================================================
     //=========================================================================
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -659,7 +659,7 @@ void UpdaterHelper::get_feature_jacobian_full_msckf(std::shared_ptr<State> state
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature.timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -728,7 +728,7 @@ void UpdaterHelper::get_stfeature_jacobian_full(std::shared_ptr<State> state, st
 
     for (size_t m = 0; m < feature->timestamps.size(); ++m) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature->timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature->timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -736,7 +736,7 @@ void UpdaterHelper::get_stfeature_jacobian_full(std::shared_ptr<State> state, st
         }
     }
 
-    std::shared_ptr<PoseHamilton> pose_MAPtoLOC = state->_pose_MAPtoLOC;
+    std::shared_ptr<Pose> pose_MAPtoLOC = state->_pose_MAPtoLOC;
     if (map_hx.find(pose_MAPtoLOC) == map_hx.end()) {
         map_hx.insert({pose_MAPtoLOC, total_hx});
         x_order.push_back(pose_MAPtoLOC);
@@ -748,7 +748,7 @@ void UpdaterHelper::get_stfeature_jacobian_full(std::shared_ptr<State> state, st
     H_x = Eigen::MatrixXd::Zero(2 * total_meas, total_hx);
     R = Eigen::MatrixXd::Zero(res.rows(), res.rows());
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -765,7 +765,7 @@ void UpdaterHelper::get_stfeature_jacobian_full(std::shared_ptr<State> state, st
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature->timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature->timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -825,10 +825,10 @@ void UpdaterHelper::get_stfeature_jacobian_full_group(std::shared_ptr<State> sta
     int total_hx = 0;
     std::unordered_map<std::shared_ptr<Type>, size_t> map_hx; // cloned pose, idx in clones_IMU
 
-    std::shared_ptr<PoseHamilton> clone_A = state->_clones_IMU.at(state->_pseudo_map_anchor_time);
+    std::shared_ptr<Pose> clone_A = state->_clones_IMU.at(state->_pseudo_map_anchor_time);
     for (size_t m = 0; m < feature->timestamps.size(); ++m) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature->timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature->timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -836,7 +836,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_group(std::shared_ptr<State> sta
         }
     }
 
-    std::shared_ptr<PoseHamilton> pose_MAPtoLOC = state->_pose_MAPtoLOC;
+    std::shared_ptr<Pose> pose_MAPtoLOC = state->_pose_MAPtoLOC;
     if (map_hx.find(pose_MAPtoLOC) == map_hx.end()) {
         map_hx.insert({pose_MAPtoLOC, total_hx});
         x_order.push_back(pose_MAPtoLOC);
@@ -848,7 +848,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_group(std::shared_ptr<State> sta
     H_x = Eigen::MatrixXd::Zero(2 * total_meas, total_hx);
     R = Eigen::MatrixXd::Zero(res.rows(), res.rows());
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -866,7 +866,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_group(std::shared_ptr<State> sta
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature->timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature->timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -950,7 +950,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_msckf(std::shared_ptr<State> sta
 
     for (size_t m = 0; m < feature->timestamps.size(); ++m) {
         // Add this clone if it is not added already
-        std::shared_ptr<PoseHamilton> clone_Ci = state->_clones_IMU.at(feature->timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ci = state->_clones_IMU.at(feature->timestamps.at(m));
         if (map_hx.find(clone_Ci) == map_hx.end()) {
             map_hx.insert({clone_Ci, total_hx});
             x_order.push_back(clone_Ci);
@@ -958,7 +958,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_msckf(std::shared_ptr<State> sta
         }
     }
 
-    std::shared_ptr<PoseHamilton> pose_MAPtoLOC = state->_pose_MAPtoLOC;
+    std::shared_ptr<Pose> pose_MAPtoLOC = state->_pose_MAPtoLOC;
     if (map_hx.find(pose_MAPtoLOC) == map_hx.end()) {
         map_hx.insert({pose_MAPtoLOC, total_hx});
         x_order.push_back(pose_MAPtoLOC);
@@ -970,7 +970,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_msckf(std::shared_ptr<State> sta
     H_x = Eigen::MatrixXd::Zero(2 * total_meas, total_hx);
     R = Eigen::MatrixXd::Zero(res.rows(), res.rows());
 
-    std::shared_ptr<PoseHamilton> calibration = state->_calib_IMUtoCAM;
+    std::shared_ptr<Pose> calibration = state->_calib_IMUtoCAM;
     Eigen::Matrix3d R_ItoC = calibration->Rot();
     Eigen::Vector3d p_IinC = calibration->pos();
 
@@ -987,7 +987,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_msckf(std::shared_ptr<State> sta
         //=========================================================================
 
         // Get current IMU clone state
-        std::shared_ptr<PoseHamilton> clone_Ii = state->_clones_IMU.at(feature->timestamps.at(m));
+        std::shared_ptr<Pose> clone_Ii = state->_clones_IMU.at(feature->timestamps.at(m));
         Eigen::Matrix3d R_GtoIi = clone_Ii->Rot().transpose();
         Eigen::Vector3d p_IiinG = clone_Ii->pos();
 
@@ -1038,7 +1038,7 @@ void UpdaterHelper::get_stfeature_jacobian_full_msckf(std::shared_ptr<State> sta
     }
 }
 
-void UpdaterHelper::get_plane_jacobian_full(std::shared_ptr<PoseHamilton> pose1, std::shared_ptr<PoseHamilton> pose2, const Eigen::Matrix3d &Roi,
+void UpdaterHelper::get_plane_jacobian_full(std::shared_ptr<Pose> pose1, std::shared_ptr<Pose> pose2, const Eigen::Matrix3d &Roi,
                                             Eigen::MatrixXd &H_x, Eigen::VectorXd &res, std::vector<std::shared_ptr<Type>> &x_order) {
     // Compute the size of the states involved with this feature
     int total_hx = 0;
@@ -1069,7 +1069,7 @@ void UpdaterHelper::get_plane_jacobian_full(std::shared_ptr<PoseHamilton> pose1,
     H_x.block(1, map_hx[pose2], 1, pose1->R()->size()) = -eR1 * R2eR2;
 }
 
-void UpdaterHelper::get_plane_jacobian_full_group(std::shared_ptr<PoseHamilton> pose1, std::shared_ptr<PoseHamilton> pose2,
+void UpdaterHelper::get_plane_jacobian_full_group(std::shared_ptr<Pose> pose1, std::shared_ptr<Pose> pose2,
                                                   const Eigen::Matrix3d &Roi, Eigen::MatrixXd &H_x, Eigen::VectorXd &res,
                                                   std::vector<std::shared_ptr<Type>> &x_order) {
     // Compute the size of the states involved with this feature
@@ -1101,7 +1101,7 @@ void UpdaterHelper::get_plane_jacobian_full_group(std::shared_ptr<PoseHamilton> 
     H_x.block(1, map_hx[pose2], 1, pose1->R()->size()) = -eR1 * R2eR2;
 }
 
-void UpdaterHelper::get_plane_jacobian_full_msckf(std::shared_ptr<PoseHamilton> pose1, std::shared_ptr<PoseHamilton> pose2,
+void UpdaterHelper::get_plane_jacobian_full_msckf(std::shared_ptr<Pose> pose1, std::shared_ptr<Pose> pose2,
                                                   const Eigen::Matrix3d &Roi, Eigen::MatrixXd &H_x, Eigen::VectorXd &res,
                                                   std::vector<std::shared_ptr<Type>> &x_order) {
     // Compute the size of the states involved with this feature
@@ -1133,7 +1133,7 @@ void UpdaterHelper::get_plane_jacobian_full_msckf(std::shared_ptr<PoseHamilton> 
     H_x.block(1, map_hx[pose2], 1, pose1->R()->size()) = -eR1 * pose2->Rot() * skew(Roi.transpose() * Eigen::Vector3d(0, 0, 1));
 }
 
-void UpdaterHelper::get_plane_jacobian_full(std::shared_ptr<PoseHamilton> pose_IitoLOC, std::shared_ptr<PoseHamilton> pose_MAPtoLOC,
+void UpdaterHelper::get_plane_jacobian_full(std::shared_ptr<Pose> pose_IitoLOC, std::shared_ptr<Pose> pose_MAPtoLOC,
                                             const Eigen::Matrix3d &prior_R_ItoMAP, const Eigen::Vector3d &prior_p_IinMAP, const Eigen::Matrix3d &Roi,
                                             Eigen::MatrixXd &H_x, Eigen::VectorXd &res, std::vector<std::shared_ptr<Type>> &x_order) {
     // Compute the size of the states involved with this feature
@@ -1187,7 +1187,7 @@ void UpdaterHelper::get_plane_jacobian_full(std::shared_ptr<PoseHamilton> pose_I
     // // cout << H_x << endl;
 }
 
-void UpdaterHelper::get_plane_jacobian_full_group(std::shared_ptr<PoseHamilton> pose_IitoLOC, std::shared_ptr<PoseHamilton> pose_MAPtoLOC,
+void UpdaterHelper::get_plane_jacobian_full_group(std::shared_ptr<Pose> pose_IitoLOC, std::shared_ptr<Pose> pose_MAPtoLOC,
                                                   const Eigen::Matrix3d &prior_R_ItoMAP, const Eigen::Vector3d &prior_p_IinMAP,
                                                   const Eigen::Matrix3d &Roi, Eigen::MatrixXd &H_x, Eigen::VectorXd &res,
                                                   std::vector<std::shared_ptr<Type>> &x_order) {
@@ -1240,7 +1240,7 @@ void UpdaterHelper::get_plane_jacobian_full_group(std::shared_ptr<PoseHamilton> 
     H_x.block(1, map_hx[pose_MAPtoLOC], 1, pose_MAPtoLOC->R()->size()) = -eR1 * R2eR2;
 }
 
-void UpdaterHelper::get_plane_jacobian_full_msckf(std::shared_ptr<PoseHamilton> pose_IitoLOC, std::shared_ptr<PoseHamilton> pose_MAPtoLOC,
+void UpdaterHelper::get_plane_jacobian_full_msckf(std::shared_ptr<Pose> pose_IitoLOC, std::shared_ptr<Pose> pose_MAPtoLOC,
                                                   const Eigen::Matrix3d &prior_R_ItoMAP, const Eigen::Vector3d &prior_p_IinMAP,
                                                   const Eigen::Matrix3d &Roi, Eigen::MatrixXd &H_x, Eigen::VectorXd &res,
                                                   std::vector<std::shared_ptr<Type>> &x_order) {

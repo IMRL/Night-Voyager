@@ -139,7 +139,7 @@ class IMU : public Type {
     std::shared_ptr<Posev> posev() { return _pose; }
 
     /// Pose type access
-    std::shared_ptr<PoseHamilton> pose() { return _pose->pose(); }
+    std::shared_ptr<Pose> pose() { return _pose->pose(); }
 
     /// Quaternion type access
     std::shared_ptr<Mat> R() { return _pose->R(); }

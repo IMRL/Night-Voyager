@@ -62,7 +62,7 @@ void UpdaterPlane::update(std::shared_ptr<State> state) {
 
     size_t ct_jacob = 0;
     size_t ct_meas = 0;
-    std::shared_ptr<PoseHamilton> cur_state;
+    std::shared_ptr<Pose> cur_state;
     if (state->_clones_IMU.find(state->_timestamp) == state->_clones_IMU.end()) {
         cur_state = state->_imu->pose();
     } else {

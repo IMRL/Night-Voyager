@@ -8,8 +8,8 @@
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.
  */
-#ifndef POSEHAMILTON_H
-#define POSEHAMILTON_H
+#ifndef Pose_H
+#define Pose_H
 
 #include "core/Mat.h"
 #include "core/Type.h"
@@ -20,9 +20,9 @@
 
 namespace night_voyager {
 
-class PoseHamilton : public Type {
+class Pose : public Type {
   public:
-    PoseHamilton() : Type(6) {
+    Pose() : Type(6) {
         // Initialize subvariables
         _R = std::shared_ptr<Mat>(new Mat());
         _p = std::shared_ptr<Vec>(new Vec(3));
@@ -31,7 +31,7 @@ class PoseHamilton : public Type {
         set_value_internal(pose0);
     }
 
-    ~PoseHamilton() {}
+    ~Pose() {}
 
     /**
      * @brief Sets id used to track location of variable in the filter covariance
@@ -82,7 +82,7 @@ class PoseHamilton : public Type {
     void set_value(const Eigen::MatrixXd &new_value) override { set_value_internal(new_value); }
 
     std::shared_ptr<Type> clone() override {
-        auto Clone = std::shared_ptr<Type>(new PoseHamilton());
+        auto Clone = std::shared_ptr<Type>(new Pose());
         Clone->set_value(value());
         return Clone;
     }
