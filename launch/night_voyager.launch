@@ -2,7 +2,7 @@
 
 	<arg name="rviz" default="true" />
 	<arg name="autorun"   default="false"/>
-    <arg name="scene_name" default="Scene_10"/>
+    <arg name="scene_name" default="Scene_04"/>
     <arg name="data_path" default="/media/gtx/Gtx04/Collected_Dataset"/>
     <arg name="bag_file1"  default="$(arg data_path)/$(arg scene_name)/Localization/$(arg scene_name).bag"/>
 	<arg name="bag_file2"  default="$(arg data_path)/$(arg scene_name)/Streetlight_Detection/$(arg scene_name)_Yolo.bag"/>
