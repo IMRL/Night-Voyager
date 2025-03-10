@@ -97,7 +97,7 @@ init:
     map_init:
         search_dist_scope1: 75
         search_dist_scope2: 75
-        sine_th: 0.05
+        sine_th: 0.1
         init_use_binary: true
         init_grey_threshold: 252
         init_grey_threshold_low: 230

@@ -1,10 +1,10 @@
-/* 
+/*
  * Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps
  * Copyright (C) 2025 Night-Voyager Contributors
- * 
+ *
  * For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
  * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>. For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
- * 
+ *
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.
  */
@@ -89,6 +89,30 @@ class Visualizer {
 
     void publish_all_possible_paths();
 
+    void readPoses(const string &path, deque<TumPose> &poses_stamp) {
+        ifstream txtFile;
+        txtFile.open(path.c_str());
+        while (!txtFile.eof()) {
+            string line;
+            getline(txtFile, line);
+            if (!line.empty()) {
+                stringstream ss;
+                ss << line;
+                TumPose pose;
+                ss >> pose.timestamp;
+                ss >> pose.position.x();
+                ss >> pose.position.y();
+                ss >> pose.position.z();
+                ss >> pose.orientation.x();
+                ss >> pose.orientation.y();
+                ss >> pose.orientation.z();
+                ss >> pose.orientation.w();
+
+                poses_stamp.push_back(pose);
+            }
+        }
+    }
+
     void save_total_state_to_file();
 
     void save_total_state_to_file_tracking_recover();
@@ -109,11 +133,9 @@ class Visualizer {
     atomic<bool> thread_update_running;
 
     // For path viz
-    unsigned int poses_seq_imu = 0;
-    unsigned int poses_seq_vins = 0, poses_seq_open_vins = 0, poses_seq_night_rider = 0, poses_seq_gt = 0;
+    unsigned int poses_seq_imu = 0, poses_seq_gt = 0;
     unsigned int num_hz = 0;
-    std::vector<geometry_msgs::PoseStamped> poses_imu;
-    std::vector<geometry_msgs::PoseStamped> poses_vins, poses_open_vins, poses_night_rider, poses_gt;
+    std::vector<geometry_msgs::PoseStamped> poses_imu, poses_gt;
 
     // deque<sensor_msgs::ImuConstPtr> imu_buffer;
     deque<ImuData> imu_buffer;
@@ -131,7 +153,7 @@ class Visualizer {
     ros::Publisher pub_poseimu, pub_pathimu, pub_paths_tracking_recover;
     ros::Publisher pub_points_msckf, pub_points_slam, pub_points_streetlight;
     ros::Publisher pub_prior_map, pub_prior_poss, pub_prior_quats, pub_init_regions, pub_near_prior_cloud, pub_view_region_bound, pub_view_region_fill, pub_odometer;
-    ros::Publisher pub_night_voyager_cam;
+    ros::Publisher pub_night_voyager_cam, pub_gt_cam, pub_gt_path;
 
     bool save_total_state, save_time_consume;
     ofstream of_state_est, of_state_std, of_state_tum_loc, of_state_tum_global, of_state_loc_part, of_state_rel_part, of_state_global_part;
@@ -151,7 +173,9 @@ class Visualizer {
 
     visualization_msgs::MarkerArray marker_array;
 
-    CameraPoseVisualization night_voyager_cam;
+    deque<TumPose> gt_poses;
+
+    CameraPoseVisualization night_voyager_cam, gt_cam;
 };
 } // namespace night_voyager
 #endif

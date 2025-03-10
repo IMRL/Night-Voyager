@@ -36,7 +36,7 @@ class TrackKLT {
           threshold(options.fast_threshold), grid_x(options.grid_x), grid_y(options.grid_y), database(std::make_shared<FeatureDatabase>()),
           min_px_dist(options.min_px_dist) {
         currid = 1;
-        cout << "num_features: " << num_features;
+        // cout << "num_features: " << num_features;
     }
 
     void feed_new_camera(const CameraData &message);

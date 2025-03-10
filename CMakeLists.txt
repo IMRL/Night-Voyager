@@ -71,8 +71,8 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES Night_Voyager
-   CATKIN_DEPENDS message_runtime roscpp rospy sensor_msgs std_msgs nav_msgs geometry_msgs image_transport visualization_msgs tf cv_bridge
-   DEPENDS EIGEN3 PCL
+  CATKIN_DEPENDS message_runtime roscpp rospy sensor_msgs std_msgs nav_msgs geometry_msgs image_transport visualization_msgs tf cv_bridge
+  DEPENDS EIGEN3 PCL
 )
 
 ###########

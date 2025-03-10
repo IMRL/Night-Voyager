@@ -323,6 +323,9 @@ struct TrackingRecoverOptions {
 struct NightVoyagerOptions {
 
     void param_load(ros::NodeHandle &nh) {
+        nh.param<bool>("display_ground_truth", display_ground_truth, false);
+        nh.param<string>("ground_truth_path", ground_truth_path, "");
+
         nh.param<string>("pcd/pcd_path", pcd_path, "");
         nh.param<int>("pcd/cluster_num", cluster_num, 0);
         nh.param<bool>("pcd/use_virtual_center", use_virtual_center, true);
@@ -580,8 +583,8 @@ struct NightVoyagerOptions {
 
     string root_dir;
 
-    string pcd_path, prior_pose_path, downsampled_pose_path, model_path, virtual_center_path;
-    bool use_virtual_center;
+    string pcd_path, prior_pose_path, downsampled_pose_path, model_path, virtual_center_path, ground_truth_path;
+    bool use_virtual_center, display_ground_truth;
     int cluster_num;
     float search_scope;
 

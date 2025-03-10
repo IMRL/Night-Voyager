@@ -1,10 +1,10 @@
-/* 
+/*
  * Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps
  * Copyright (C) 2025 Night-Voyager Contributors
- * 
+ *
  * For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
  * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>. For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
- * 
+ *
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.
  */
@@ -60,12 +60,24 @@ Visualizer::Visualizer(ros::NodeHandle &nh, const NightVoyagerOptions &options, 
     pub_near_prior_cloud = nh.advertise<sensor_msgs::PointCloud2>("near_prior_cloud", 10);
 
     pub_night_voyager_cam = nh.advertise<visualization_msgs::MarkerArray>("/night_voyager_cam", 100000);
+    pub_gt_cam = nh.advertise<visualization_msgs::MarkerArray>("/gt_cam", 100000);
     night_voyager_cam.setRGBA(0, 0.67, 1, 1);
+    gt_cam.setRGBA(1, 1, 1, 1);
+
+    if (options.display_ground_truth) {
+        readPoses(options.ground_truth_path, gt_poses);
+        PRINT_INFO("Sucessfully read %d ground truth poses\n", gt_poses.size());
+    }
+
+    pub_gt_path = nh.advertise<nav_msgs::Path>("/aligned_gt_path", 100000);
 
     save_total_state = options.save_total_state;
     save_time_consume = options.save_time_consume;
     if (options.save_total_state) {
-        cout << endl << options.of_state_est << endl << options.of_state_std << endl << options.of_state_tum_loc << endl << options.of_state_tum_global << endl;
+        PRINT_INFO("of_state_est path: %s\n", options.of_state_est.c_str());
+        PRINT_INFO("of_state_std path: %s\n", options.of_state_std.c_str());
+        PRINT_INFO("of_state_tum_loc path: %s\n", options.of_state_tum_loc.c_str());
+        PRINT_INFO("of_state_tum_global path: %s\n", options.of_state_tum_global.c_str());
         // If it exists, then delete it
         if (boost::filesystem::exists(options.of_state_est))
             boost::filesystem::remove(options.of_state_est);
@@ -1095,6 +1107,37 @@ void Visualizer::publish_cam_path() {
     night_voyager_cam.add_pose(Eigen::Vector3d(posetemp.pose.position.x, posetemp.pose.position.y, posetemp.pose.position.z),
                                Eigen::Quaterniond(posetemp.pose.orientation.w, posetemp.pose.orientation.x, posetemp.pose.orientation.y, posetemp.pose.orientation.z));
     night_voyager_cam.publish_by(pub_night_voyager_cam, state->_timestamp);
+
+    PRINT_INFO("gt_poses.time: %.8f\n", gt_poses.front().timestamp);
+    PRINT_INFO("state->_timestamp: %.8f\n", state->_timestamp);
+    while (!gt_poses.empty() && gt_poses.front().timestamp < state->_timestamp) {
+        Eigen::Quaterniond ori_OtoMAP_other = (gt_poses.front().orientation * Eigen::Quaterniond(state->_calib_IMUtoCAM->Rot().transpose())).normalized();
+        posetemp.pose.position.x = gt_poses.front().position.x();
+        posetemp.pose.position.y = gt_poses.front().position.y();
+        posetemp.pose.position.z = gt_poses.front().position.z();
+        posetemp.pose.orientation.x = ori_OtoMAP_other.x();
+        posetemp.pose.orientation.y = ori_OtoMAP_other.y();
+        posetemp.pose.orientation.z = ori_OtoMAP_other.z();
+        posetemp.pose.orientation.w = ori_OtoMAP_other.w();
+        poses_gt.push_back(posetemp);
+
+        gt_cam.reset();
+        gt_cam.add_pose(gt_poses.front().position, ori_OtoMAP_other);
+        gt_cam.publish_by(pub_gt_cam, gt_poses.front().timestamp);
+
+        nav_msgs::Path path;
+        path.header.stamp = ros::Time::now();
+        path.header.seq = poses_seq_gt;
+        path.header.frame_id = "global";
+        for (size_t i = 0; i < poses_gt.size(); i += std::floor((double)poses_gt.size() / 16384.0) + 1) {
+            path.poses.push_back(poses_gt.at(i));
+        }
+        pub_gt_path.publish(path);
+
+        // Move them forward in time
+        gt_poses.pop_front();
+        poses_seq_gt++;
+    }
 }
 
 void Visualizer::publish_features_tracking_recover() {

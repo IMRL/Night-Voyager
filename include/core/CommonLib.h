@@ -1,10 +1,10 @@
-/* 
+/*
  * Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps
  * Copyright (C) 2025 Night-Voyager Contributors
- * 
+ *
  * For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo>
  * or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>. For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
- * 
+ *
  * This file is subject to the terms and conditions outlined in the 'LICENSE' file,
  * which is included as part of this source code package.
  */
@@ -23,7 +23,17 @@ using namespace std;
 
 namespace night_voyager {
 
+struct TumPose {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+    
+    double timestamp;
+    Eigen::Vector3d position;
+    Eigen::Quaterniond orientation;
+};
+
 struct ImuData {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
     double timestamp;
 
     Eigen::Vector3d wm;
@@ -34,6 +44,7 @@ struct ImuData {
 };
 
 struct NoiseManager {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     /// Gyroscope white noise covariance
     vector<double> sigma_w;
@@ -57,6 +68,7 @@ struct NoiseManager {
 };
 
 struct OdomNoiseManager {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     Eigen::Vector3d sigma_v;
 
@@ -75,6 +87,7 @@ struct CameraData {
 };
 
 struct OdomData {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     double timestamp;
 
@@ -84,6 +97,7 @@ struct OdomData {
 };
 
 struct BoxData {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     double timestamp;
 
@@ -97,6 +111,7 @@ struct BoxData {
 };
 
 struct PackData {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     CameraData cam;
 
@@ -108,6 +123,7 @@ struct PackData {
 };
 
 struct STMatch {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     cv::Rect rect;
 
@@ -123,6 +139,7 @@ struct STMatch {
 };
 
 struct ScoreData {
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
     /// index of streetlight cluster
     size_t id;
@@ -390,8 +407,7 @@ class CamEqui : public CamBase {
         // Calculate distorted coordinates for fisheye
         double r = std::sqrt(uv_norm(0) * uv_norm(0) + uv_norm(1) * uv_norm(1));
         double theta = std::atan(r);
-        double theta_d =
-            theta + cam_d(4) * std::pow(theta, 3) + cam_d(5) * std::pow(theta, 5) + cam_d(6) * std::pow(theta, 7) + cam_d(7) * std::pow(theta, 9);
+        double theta_d = theta + cam_d(4) * std::pow(theta, 3) + cam_d(5) * std::pow(theta, 5) + cam_d(6) * std::pow(theta, 7) + cam_d(7) * std::pow(theta, 9);
 
         // Handle when r is small (meaning our xy is near the camera center)
         double inv_r = (r > 1e-8) ? 1.0 / r : 1.0;
@@ -420,8 +436,7 @@ class CamEqui : public CamBase {
         // Calculate distorted coordinates for fisheye
         double r = std::sqrt(uv_norm(0) * uv_norm(0) + uv_norm(1) * uv_norm(1));
         double theta = std::atan(r);
-        double theta_d =
-            theta + cam_d(4) * std::pow(theta, 3) + cam_d(5) * std::pow(theta, 5) + cam_d(6) * std::pow(theta, 7) + cam_d(7) * std::pow(theta, 9);
+        double theta_d = theta + cam_d(4) * std::pow(theta, 3) + cam_d(5) * std::pow(theta, 5) + cam_d(6) * std::pow(theta, 7) + cam_d(7) * std::pow(theta, 9);
 
         // Handle when r is small (meaning our xy is near the camera center)
         double inv_r = (r > 1e-8) ? 1.0 / r : 1.0;
@@ -448,8 +463,7 @@ class CamEqui : public CamBase {
         dxy_dthd << uv_norm(0) * inv_r, uv_norm(1) * inv_r;
 
         // Jacobian of theta_d to theta
-        double dthd_dth = 1 + 3 * cam_d(4) * std::pow(theta, 2) + 5 * cam_d(5) * std::pow(theta, 4) + 7 * cam_d(6) * std::pow(theta, 6) +
-                          9 * cam_d(7) * std::pow(theta, 8);
+        double dthd_dth = 1 + 3 * cam_d(4) * std::pow(theta, 2) + 5 * cam_d(5) * std::pow(theta, 4) + 7 * cam_d(6) * std::pow(theta, 6) + 9 * cam_d(7) * std::pow(theta, 8);
 
         // Jacobian of theta to r
         double dth_dr = 1 / (r * r + 1);
@@ -533,10 +547,8 @@ class CamRadtan : public CamBase {
         double r = std::sqrt(uv_norm(0) * uv_norm(0) + uv_norm(1) * uv_norm(1));
         double r_2 = r * r;
         double r_4 = r_2 * r_2;
-        double x1 = uv_norm(0) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + 2 * cam_d(6) * uv_norm(0) * uv_norm(1) +
-                    cam_d(7) * (r_2 + 2 * uv_norm(0) * uv_norm(0));
-        double y1 = uv_norm(1) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + cam_d(6) * (r_2 + 2 * uv_norm(1) * uv_norm(1)) +
-                    2 * cam_d(7) * uv_norm(0) * uv_norm(1);
+        double x1 = uv_norm(0) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + 2 * cam_d(6) * uv_norm(0) * uv_norm(1) + cam_d(7) * (r_2 + 2 * uv_norm(0) * uv_norm(0));
+        double y1 = uv_norm(1) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + cam_d(6) * (r_2 + 2 * uv_norm(1) * uv_norm(1)) + 2 * cam_d(7) * uv_norm(0) * uv_norm(1);
 
         // Return the distorted point
         Eigen::Vector2f uv_dist;
@@ -568,18 +580,16 @@ class CamRadtan : public CamBase {
         double x_2 = uv_norm(0) * uv_norm(0);
         double y_2 = uv_norm(1) * uv_norm(1);
         double x_y = uv_norm(0) * uv_norm(1);
-        H_dz_dzn(0, 0) = cam_d(0) * ((1 + cam_d(4) * r_2 + cam_d(5) * r_4) + (2 * cam_d(4) * x_2 + 4 * cam_d(5) * x_2 * r_2) + 2 * cam_d(6) * y +
-                                     (2 * cam_d(7) * x + 4 * cam_d(7) * x));
+        H_dz_dzn(0, 0) =
+            cam_d(0) * ((1 + cam_d(4) * r_2 + cam_d(5) * r_4) + (2 * cam_d(4) * x_2 + 4 * cam_d(5) * x_2 * r_2) + 2 * cam_d(6) * y + (2 * cam_d(7) * x + 4 * cam_d(7) * x));
         H_dz_dzn(0, 1) = cam_d(0) * (2 * cam_d(4) * x_y + 4 * cam_d(5) * x_y * r_2 + 2 * cam_d(6) * x + 2 * cam_d(7) * y);
         H_dz_dzn(1, 0) = cam_d(1) * (2 * cam_d(4) * x_y + 4 * cam_d(5) * x_y * r_2 + 2 * cam_d(6) * x + 2 * cam_d(7) * y);
-        H_dz_dzn(1, 1) = cam_d(1) * ((1 + cam_d(4) * r_2 + cam_d(5) * r_4) + (2 * cam_d(4) * y_2 + 4 * cam_d(5) * y_2 * r_2) + 2 * cam_d(7) * x +
-                                     (2 * cam_d(6) * y + 4 * cam_d(6) * y));
+        H_dz_dzn(1, 1) =
+            cam_d(1) * ((1 + cam_d(4) * r_2 + cam_d(5) * r_4) + (2 * cam_d(4) * y_2 + 4 * cam_d(5) * y_2 * r_2) + 2 * cam_d(7) * x + (2 * cam_d(6) * y + 4 * cam_d(6) * y));
 
         // Calculate distorted coordinates for radtan
-        double x1 = uv_norm(0) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + 2 * cam_d(6) * uv_norm(0) * uv_norm(1) +
-                    cam_d(7) * (r_2 + 2 * uv_norm(0) * uv_norm(0));
-        double y1 = uv_norm(1) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + cam_d(6) * (r_2 + 2 * uv_norm(1) * uv_norm(1)) +
-                    2 * cam_d(7) * uv_norm(0) * uv_norm(1);
+        double x1 = uv_norm(0) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + 2 * cam_d(6) * uv_norm(0) * uv_norm(1) + cam_d(7) * (r_2 + 2 * uv_norm(0) * uv_norm(0));
+        double y1 = uv_norm(1) * (1 + cam_d(4) * r_2 + cam_d(5) * r_4) + cam_d(6) * (r_2 + 2 * uv_norm(1) * uv_norm(1)) + 2 * cam_d(7) * uv_norm(0) * uv_norm(1);
 
         // Compute the Jacobian in respect to the intrinsics
         H_dz_dzeta = Eigen::MatrixXd::Zero(2, 8);
