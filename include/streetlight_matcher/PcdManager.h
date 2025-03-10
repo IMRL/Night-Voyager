@@ -36,12 +36,11 @@ class PcdManager {
         valid_streetlight2d_center_cloud = boost::make_shared<pcl::PointCloud<pcl::PointXY>>();
         matched_streetlight_cloud = boost::make_shared<pcl::PointCloud<pcl::PointXYZRGB>>();
 
-        cluster_num = options.cluster_num;
+        readPcd(options.pcd_path);
+        streetlight2d_center_cloud->resize(cluster_num);
         points.resize(cluster_num);
         center_points.resize(cluster_num);
 
-        readPcd(options.pcd_path);
-        streetlight2d_center_cloud->resize(cluster_num);
         for (const auto &point : streetlight_cloud->points) {
             // cout << point.intensity;
             points[int(point.intensity)].push_back(Eigen::Vector3d(point.x, point.y, point.z));
@@ -89,6 +88,27 @@ class PcdManager {
             exit(EXIT_FAILURE);
         }
 
+        cluster_num = 0;
+        while (!pcdFile.eof()) {
+            string line;
+            getline(pcdFile, line);
+            if (!line.empty()) {
+                stringstream ss;
+                ss << line;
+                
+                double index;
+                ss >> index;
+                cluster_num = max(cluster_num, int(index));
+            }
+        }
+        if (cluster_num == 0){
+            PRINT_ERROR(RED "[read-pcd]: Cannot read pcd file %s!\n" RESET, pcd_path.c_str());
+            exit(EXIT_FAILURE);
+        }
+        cluster_num += 1;
+
+        pcdFile.clear();               
+        pcdFile.seekg(0, ios::beg); 
         while (!pcdFile.eof()) {
             string line;
             getline(pcdFile, line);

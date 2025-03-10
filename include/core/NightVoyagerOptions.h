@@ -326,17 +326,18 @@ struct NightVoyagerOptions {
         nh.param<bool>("display_ground_truth", display_ground_truth, false);
         nh.param<string>("ground_truth_path", ground_truth_path, "");
 
-        nh.param<string>("pcd/pcd_path", pcd_path, "");
-        nh.param<int>("pcd/cluster_num", cluster_num, 0);
-        nh.param<bool>("pcd/use_virtual_center", use_virtual_center, true);
-        nh.param<string>("pcd/virtual_center_path", virtual_center_path, "");
-        pcd_path = root_dir + pcd_path;
-        virtual_center_path = root_dir + virtual_center_path;
-
-        nh.param<string>("prior_pose/downsampled_pose_path", downsampled_pose_path, "");
-        nh.param<string>("prior_pose/prior_pose_path", prior_pose_path, "");
-        downsampled_pose_path = root_dir + downsampled_pose_path;
-        prior_pose_path = root_dir + prior_pose_path;
+        nh.param<string>("pcd_path", pcd_path, "");
+        nh.param<string>("virtual_center_path", virtual_center_path, "");
+        nh.param<string>("downsampled_pose_path", downsampled_pose_path, "");
+        nh.param<string>("prior_pose_path", prior_pose_path, "");
+        PRINT_INFO("pcd_path: %s\n", pcd_path.c_str());
+        PRINT_INFO("virtual_center_path: %s\n", virtual_center_path.c_str());
+        PRINT_INFO("downsampled_pose_path: %s\n", downsampled_pose_path.c_str());
+        PRINT_INFO("prior_pose_path: %s\n", prior_pose_path.c_str());
+        // pcd_path = root_dir + pcd_path;
+        // virtual_center_path = root_dir + virtual_center_path;
+        // downsampled_pose_path = root_dir + downsampled_pose_path;
+        // prior_pose_path = root_dir + prior_pose_path;
 
         nh.param<string>("common/img_topic", img_topic, "/camera/color/image_raw/compressed");
         nh.param<string>("common/imu_topic", imu_topic, "/imu_data");
@@ -365,6 +366,7 @@ struct NightVoyagerOptions {
         nh.param<bool>("update/do_update_odom", do_update_odom, true);
         nh.param<bool>("update/do_update_map", do_update_map, true);
         nh.param<bool>("update/do_update_plane", do_update_plane, true);
+        nh.param<bool>("update/use_virtual_center", use_virtual_center, true);
         nh.param<bool>("update/use_match_extension", use_match_extension, true);
         nh.param<double>("update/msckf_iekf_sigma_px", msckf_options.sigma_pix, 1);
         nh.param<double>("update/msckf_chi2_multipler", msckf_options.chi2_multipler, 5);
@@ -585,7 +587,6 @@ struct NightVoyagerOptions {
 
     string pcd_path, prior_pose_path, downsampled_pose_path, model_path, virtual_center_path, ground_truth_path;
     bool use_virtual_center, display_ground_truth;
-    int cluster_num;
     float search_scope;
 
     string img_topic;
