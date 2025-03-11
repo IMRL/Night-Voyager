@@ -48,13 +48,27 @@ catkin_make && catkin_make
 source ~/ws_Night_Voyager/devel/setup.bash
 ```
 
-## 6. Run
+## 5. Run
 Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4)). Since the ROS bag playback node is already included in the launch files, please update the file paths in the launch files (located in the launch subdirectory) to match the downloaded ROS bag files. Additionally, by modifying the "scene_name" parameter, you can test Night-Voyager with the corresponding sequence.
 ```
 roslaunch night_voyager night_voyager.launch
 ```
 
-## 7. Citation
+The characters of each equence are summarized in the following table:
+| <font size="4">**Sequence**</font> | <font size="4">**Distance (m)**</font> | <font size="4">**Scene Type**</font>  | <font size="4">**Distribution**</font> | <font size="4">**Preview**</font> | <font size="4">**Map**</font> |
+|:------------:|:----------------:|:---------------:|:----------------:|:-----------:|:-------:|
+| <font size="3">_Scene_01_</font>   | <font size="3">724</font>              | <font size="3">Avenue & Garden</font> | <font size="3">Sparse</font>           | <img src="./img/Scene_01_preview.png" alt="Scene_01_preview" width="330">    | <img src="./img/Scene_01_map.png" alt="Scene_01_map" width="330"> |
+| <font size="3">_Scene_02_</font>   | <font size="3">613</font>              | <font size="3">Lane</font>            | <font size="3">Dense</font>            | <img src="./img/Scene_02_preview.png" alt="Scene_02_preview" width="330">    | <img src="./img/Scene_02_map.png" alt="Scene_02_map" width="330"> |
+| <font size="3">_Scene_03_</font>   | <font size="3">635</font>              | <font size="3">Lane & Pavement</font> | <font size="3">Sparse</font>           | <img src="./img/Scene_03_preview.png" alt="Scene_03_preview" width="330">    | <img src="./img/Scene_03_map.png" alt="Scene_03_map" width="330"> |
+| <font size="3">_Scene_04_</font>   | <font size="3">305</font>              | <font size="3">Garden</font>          | <font size="3">Sparse</font>           | <img src="./img/Scene_04_preview.png" alt="Scene_04_preview" width="330">    | <img src="./img/Scene_04_map.png" alt="Scene_04_map" width="330"> |
+| <font size="3">_Scene_05_</font>   | <font size="3">777</font>              | <font size="3">Seaside Road</font>    | <font size="3">Dense</font>            | <img src="./img/Scene_05_preview.png" alt="Scene_05_preview" width="330">    | <img src="./img/Scene_05_map.png" alt="Scene_05_map" width="330"> |
+| <font size="3">_Scene_06_</font>   | <font size="3">1071</font>             | <font size="3">Seaside Road</font>    | <font size="3">Dense</font>            | <img src="./img/Scene_06_preview.png" alt="Scene_06_preview" width="330">    | <img src="./img/Scene_06_map.png" alt="Scene_06_map" width="330"> |
+| <font size="3">_Scene_07_</font>   | <font size="3">892</font>              | <font size="3">Avenue & Garden</font> | <font size="3">Mixed</font>            | <img src="./img/Scene_07_preview.png" alt="Scene_07_preview" width="330">    | <img src="./img/Scene_07_map.png" alt="Scene_07_map" width="330"> |
+| <font size="3">_Scene_08_</font>   | <font size="3">719</font>              | <font size="3">Alley & Campus</font>  | <font size="3">Mixed</font>            | <img src="./img/Scene_08_preview.png" alt="Scene_08_preview" width="330">    | <img src="./img/Scene_08_map.png" alt="Scene_08_map" width="330"> |
+| <font size="3">_Scene_09_</font>   | <font size="3">842</font>              | <font size="3">Campus</font>          | <font size="3">Mixed</font>            | <img src="./img/Scene_09_preview.png" alt="Scene_09_preview" width="330">    | <img src="./img/Scene_09_map.png" alt="Scene_09_map" width="330"> |
+| <font size="3">_Scene_10_</font>   | <font size="3">601</font>              | <font size="3">Bridge & Avenue</font> | <font size="3">Mixed</font>            | <img src="./img/Scene_10_preview.png" alt="Scene_10_preview" width="330">    | <img src="./img/Scene_10_map.png" alt="Scene_10_map" width="330"> |
+
+## 6. Citation
 If you find our work beneficial to your research, you may consider citing:
 
 ```
@@ -80,9 +94,9 @@ If you find our work beneficial to your research, you may consider citing:
   doi={10.1109/TRO.2025.3548540}
 }
 ```
-## 8. Acknowledgement
+## 7. Acknowledgement
 The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic works!
 
-## 9. Contact
+## 8. Contact
 - For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>.
 - For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
