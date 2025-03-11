@@ -14,7 +14,7 @@
 
 ## News
 - **2025-03-02**: The code and the collected nighttime dataset are released!
-- **2025-02-18**: Our paper is accepted by T-RO 2025!
+- **2025-02-18**: Our paper is accepted by IEEE T-RO 2025!
 
 ## 1. Introduction
 **Night-Voyager** is a consistent and efficient framework that harnesses rare object-level information from streetlight maps to fundamentally resolve the insufficiency and inconsistency bottlenecks inherent in nocturnal visual tasks, achieving robust and versatile nocturnal vision-aided state estimation in object maps.
@@ -81,7 +81,7 @@ If you find our work beneficial to your research, you may consider citing:
 }
 ```
 ## 8. Acknowledgement
-The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic work!
+The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic works!
 
 ## 9. Contact
 - For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>.
