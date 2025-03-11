@@ -21,7 +21,7 @@
 ![](./img/System_Framework.png)
 
 ## 2. Dataset
-The collected nighttime dataset ([**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4)) is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms. The streetlight detections are recorded in a separate folder and the constructed streetlight maps are placed in another folder. Additionally, we also leverage the nighttime sequences of the public [**MCD Dataset**](https://mcdviral.github.io/) for evaluation.
+The collected nighttime dataset ([**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4)) is also available online. Each scenario in the dataset comprises two sets: one for constructing the streetlight map and the other for evaluating the algorithms. The streetlight detections are recorded in a separate folder and the constructed streetlight maps are placed in another folder. More details of the [**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4) can be found [here](#Night-Voyager Dataset). Additionally, we also leverage the nighttime sequences of the public [**MCD Dataset**](https://mcdviral.github.io/) for evaluation.
 
 ## 3. Prerequisites
 ### 3.1. Ubuntu and ROS
@@ -54,6 +54,7 @@ Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset*
 roslaunch night_voyager night_voyager.launch
 ```
 
+## 6. Night-Voyager Dataset
 The characters of each equence are summarized in the following table:
 | <font size="2.5">**Sequence**</font> | <font size="2.5">**Distance**</font> | <font size="2.5">**Scene**</font>  | <font size="2.5">**Distribution**</font> | <font size="2.5">**Preview**</font> | <font size="2.5">**Map**</font> |
 |:------------:|:----------------:|:---------------:|:----------------:|:-----------:|:-------:|
@@ -68,7 +69,7 @@ The characters of each equence are summarized in the following table:
 | <font size="2">_Scene_09_</font>   | <font size="2">842 m</font>              | <font size="2">Campus</font>          | <font size="2">Mixed</font>            | <img src="./img/Scene_09_preview.png" alt="Scene_09_preview" width="155">    | <img src="./img/Scene_09_map.png" alt="Scene_09_map" width="155"> |
 | <font size="2">_Scene_10_</font>   | <font size="2">601 m</font>              | <font size="2">Bridge & Avenue</font> | <font size="2">Mixed</font>            | <img src="./img/Scene_10_preview.png" alt="Scene_10_preview" width="155">    | <img src="./img/Scene_10_map.png" alt="Scene_10_map" width="155"> |
 
-## 6. Citation
+## 7. Citation
 If you find our work beneficial to your research, you may consider citing:
 
 ```
@@ -94,9 +95,9 @@ If you find our work beneficial to your research, you may consider citing:
   doi={10.1109/TRO.2025.3548540}
 }
 ```
-## 7. Acknowledgement
+## 8. Acknowledgement
 The code references the implementation of the [P3P solver](https://github.com/yaqding/P3P?tab=readme-ov-file) and [OpenVINS](https://github.com/username/project). We thank the authors for their fantastic works!
 
-## 8. Contact
+## 9. Contact
 - For technical issues and support, please contact Tianxiao Gao at <ga0.tianxiao@connect.um.edu.mo> or Mingle Zhao at <zhao.mingle@connect.um.edu.mo>.
 - For commercial use, please contact Prof. Hui Kong at <huikong@um.edu.mo>.
