@@ -49,7 +49,7 @@ source ~/ws_Night_Voyager/devel/setup.bash
 ```
 
 ## 5. Run
-Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4)). Since the ROS bag playback node is already included in the launch files, please update the file paths ("**data_path**") in the launch files (located in the launch subdirectory) to match the downloaded ROS bag files. Additionally, by modifying the "**scene_name**" parameter, you can test Night-Voyager with the corresponding sequence.
+Download our collected rosbag files via Baidu NetDisk ([**Night-Voyager Dataset**](https://pan.baidu.com/s/1vgTCHH3kppxkb1PW5Y8vNg?pwd=r2v4)). Since the ROS bag playback node is already included in the launch files, please update the file path ("**data_path**") in the launch files (located in the launch subdirectory) to match the downloaded ROS bag files. Additionally, by modifying the "**scene_name**" parameter, you can test Night-Voyager with the corresponding sequence.
 ```
 roslaunch night_voyager night_voyager.launch
 ```
