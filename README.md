@@ -14,7 +14,7 @@
 
 ## News
 - **2025-03-02**: The code and the collected nighttime dataset are released. 
-- **2025-02-18**: Our paper is accepted by IEEE Transactions on Robotics (T-RO), 2025. 
+- **2025-02-18**: The paper is accepted by IEEE Transactions on Robotics (T-RO), 2025. 
 
 ## 1. Introduction
 **Night-Voyager** is a consistent and efficient framework that harnesses rare object-level information from streetlight maps to fundamentally resolve the insufficiency and inconsistency bottlenecks inherent in nocturnal visual tasks, achieving robust and versatile nocturnal vision-aided state estimation in object maps.
