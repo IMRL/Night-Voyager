@@ -70,7 +70,7 @@ The characters of each sequence are summarized in the following table:
 | <font size="2">_Scene_10_</font>   | <font size="2">601 m</font>              | <font size="2">Bridge & Avenue</font> | <font size="2">Mixed</font>            | <img src="./img/Scene_10_preview.png" alt="Scene_10_preview" width="155">    | <img src="./img/Scene_10_map.png" alt="Scene_10_map" width="155"> |
 
 ## 7. Citation
-If you find our work beneficial to your research, you may consider citing:
+If you find the works beneficial to your research, you may consider citing:
 
 ```
 @inproceedings{gao2024night,
