@@ -55,7 +55,7 @@ roslaunch night_voyager night_voyager.launch
 ```
 
 The characters of each equence are summarized in the following table:
-| <font size="2.5">**Sequence**</font> | <font size="2.5">**Distance (m)**</font> | <font size="2.5">**Scene Type**</font>  | <font size="2.5">**Distribution**</font> | <font size="2.5">**Preview**</font> | <font size="2.5">**Map**</font> |
+| <font size="2.5">**Sequence**</font> | <font size="2.5">**Distance (m)**</font> | <font size="2.5">**Scene**</font>  | <font size="2.5">**Distribution**</font> | <font size="2.5">**Preview**</font> | <font size="2.5">**Map**</font> |
 |:------------:|:----------------:|:---------------:|:----------------:|:-----------:|:-------:|
 | <font size="2">_Scene_01_</font>   | <font size="2">724</font>              | <font size="2">Avenue & Garden</font> | <font size="2">Sparse</font>           | <img src="./img/Scene_01_preview.png" alt="Scene_01_preview" width="220">    | <img src="./img/Scene_01_map.png" alt="Scene_01_map" width="220"> |
 | <font size="2">_Scene_02_</font>   | <font size="2">613</font>              | <font size="2">Lane</font>            | <font size="2">Dense</font>            | <img src="./img/Scene_02_preview.png" alt="Scene_02_preview" width="220">    | <img src="./img/Scene_02_map.png" alt="Scene_02_map" width="220"> |
