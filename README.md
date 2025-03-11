@@ -55,7 +55,7 @@ roslaunch night_voyager night_voyager.launch
 ```
 
 ## 6. Night-Voyager <span id="jump">Dataset</span>
-The characters of each equence are summarized in the following table:
+The characters of each sequence are summarized in the following table:
 | <font size="2.5">**Sequence**</font> | <font size="2.5">**Distance**</font> | <font size="2.5">**Scene**</font>  | <font size="2.5">**Distribution**</font> | <font size="2.5">**Preview**</font> | <font size="2.5">**Map**</font> |
 |:------------:|:----------------:|:---------------:|:----------------:|:-----------:|:-------:|
 | <font size="2">_Scene_01_</font>   | <font size="2">724 m</font>              | <font size="2">Avenue & Garden</font> | <font size="2">Sparse</font>           | <img src="./img/Scene_01_preview.png" alt="Scene_01_preview" width="155">    | <img src="./img/Scene_01_map.png" alt="Scene_01_map" width="155"> |
