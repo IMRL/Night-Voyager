@@ -83,16 +83,12 @@ If you find the works beneficial to your research, you may consider citing:
 }
 ```
 ```
-@ARTICLE{10914553,
+@article{gao2025night,
+  title={Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps},
   author={Gao, Tianxiao and Zhao, Mingle and Xu, Chengzhong and Kong, Hui},
-  journal={IEEE Transactions on Robotics}, 
-  title={Night-Voyager: Consistent and Efficient Nocturnal Vision-Aided State Estimation in Object Maps}, 
+  journal={IEEE Transactions on Robotics},
   year={2025},
-  volume={},
-  number={},
-  pages={1-20},
-  keywords={State estimation;Visualization;Location awareness;Lighting;Robots;Cameras;Accuracy;Feature extraction;Standards;Robot vision systems;Localization;SLAM;Sensor Fusion;State Estimation;Object Map},
-  doi={10.1109/TRO.2025.3548540}
+  publisher={IEEE}
 }
 ```
 ## 8. Acknowledgement
